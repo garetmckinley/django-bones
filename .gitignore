@@ -1,0 +1,4 @@
+*.pyc
+.DS_Store
+bones/templates/mediachicken
+bones/static/bones/templates/mediachicken
