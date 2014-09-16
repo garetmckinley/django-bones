@@ -5,17 +5,14 @@ module.exports = (grunt) ->
     watch:
       options:
         livereload: true
-      #templates:
-      #  files: ['jade/*.jade']
-      #  tasks: ['jade']
       css:
-        files: ['static/bones/templates/'+template+'/scss/*.scss']
+        files: ['templates/'+template+'/scss/*.scss']
         tasks: ['compass']
 
     compass:
       dist:
         options:
-          sassDir: 'static/bones/templates/'+template+'/scss/'
+          sassDir: 'templates/'+template+'/scss/'
           cssDir: static_path+'/bones/templates/'+template+'/css/'
 
   @loadNpmTasks("grunt-contrib-watch")
