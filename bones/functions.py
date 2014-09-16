@@ -19,9 +19,12 @@ def getTemplateStatic():
 
 
 def getModernizrDict(request):
-    get = request.COOKIES.get('modernizr')
-    url = urllib.unquote(get).decode('utf8')
-    # print(url)
+    try:
+        get = request.COOKIES.get('modernizr')
+        url = urllib.unquote(get).decode('utf8')
+    except:
+        return {}
+
     values = re.split('=|&', url)
     modernizr = {}
     keys = [x for ind, x in enumerate(values) if ind % 2 == 0]
