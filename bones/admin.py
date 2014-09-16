@@ -1,5 +1,5 @@
 from django.contrib import admin
-from bones.models import BonesObject, Post, BonesProfile
+from bones.models import BonesObject, Post, BonesProfile, Media
 
 
 class BonesObjectAdmin(admin.ModelAdmin):
@@ -8,5 +8,6 @@ class BonesObjectAdmin(admin.ModelAdmin):
 
 
 # Register your models here.
+admin.site.register(Media, BonesObjectAdmin)
 admin.site.register(Post, BonesObjectAdmin)
 admin.site.register(BonesProfile)
