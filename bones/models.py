@@ -35,6 +35,7 @@ post_save.connect(create_user_profile, sender=User)
 
 
 class Media(BonesObject):
+
     """Blog upload class"""
     file = models.ImageField(upload_to='uploads/')
     url = models.URLField(max_length=255, blank=True, null=True)
