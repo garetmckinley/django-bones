@@ -7,8 +7,8 @@ from django.conf import settings
 
 # Default object model for bones
 class BonesObject(models.Model):
-    title = models.CharField(max_length=255, null=True, blank=True)
-    slug = models.SlugField(null=True, blank=True)
+    title = models.CharField(max_length=255, blank=True)
+    slug = models.SlugField(blank=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
     last_edited = models.DateTimeField(auto_now=True, null=True)
 
