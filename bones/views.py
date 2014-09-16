@@ -1,7 +1,7 @@
 from django.template import RequestContext
 from django.http import HttpResponse
 from django.shortcuts import render
-import functions
+from bones import functions
 
 # Create your views here.
 
