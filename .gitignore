@@ -2,3 +2,6 @@
 .DS_Store
 bones/templates/mediachicken
 bones/static/bones/templates/mediachicken
+.sass-cache
+node_modules
+migrations
