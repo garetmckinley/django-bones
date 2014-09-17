@@ -7,8 +7,8 @@ from django.conf import settings
 
 # Default object model for bones
 class BonesObject(models.Model):
-    title = models.CharField(max_length=255, blank=True)
-    slug = models.SlugField(blank=True)
+    title = models.CharField(max_length=255, null=True, blank=True)
+    slug = models.SlugField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
     last_edited = models.DateTimeField(auto_now=True, null=True)
 
@@ -21,7 +21,7 @@ class BonesObject(models.Model):
 
 class BonesProfile(models.Model):
     user = models.OneToOneField(User)
-    avatar = models.ImageField(upload_to='avatars')
+    avatar = models.ImageField(upload_to='avatars', null=True)
 
     def __str__(self):
         return "%s's profile" % self.user
@@ -37,7 +37,7 @@ post_save.connect(create_user_profile, sender=User)
 class Media(BonesObject):
 
     """Blog upload class"""
-    file = models.ImageField(upload_to='uploads/')
+    file = models.ImageField(upload_to='uploads/', null=True)
     url = models.URLField(max_length=255, blank=True, null=True)
 
     def save(self, force_insert=False, force_update=False, using=False):
@@ -47,10 +47,17 @@ class Media(BonesObject):
         super(Media, self).save(force_insert, force_update)
 
     class Meta:
-        verbose_name = "media"
         verbose_name_plural = "media"
+
+
+# Blog category model
+class Category(BonesObject):
+
+    class Meta:
+        verbose_name_plural = "categories"
 
 
 # Blog post model
 class Post(BonesObject):
-    content = models.TextField()
+    category = models.ForeignKey('Category', null=True, default=1)
+    content = models.TextField(null=True)
