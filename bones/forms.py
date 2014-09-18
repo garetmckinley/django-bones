@@ -35,9 +35,39 @@ class YamlAceWidget(forms.Textarea):
         )
 
 
+class CoffeeAceWidget(forms.Textarea):
+
+    class Media:
+        css = {
+            'all': (
+                'bones/admin/coffee_widget/style.css',
+            )
+        }
+        js = (
+            'bones/lib/ace/ace.js',
+            'bones/admin/coffee_widget/init.js',
+        )
+
+
+class ScssAceWidget(forms.Textarea):
+
+    class Media:
+        css = {
+            'all': (
+                'bones/admin/scss_widget/style.css',
+            )
+        }
+        js = (
+            'bones/lib/ace/ace.js',
+            'bones/admin/scss_widget/init.js',
+        )
+
+
 class PostForm(forms.ModelForm):
     content = forms.CharField(widget=PostVueWidget)
     yaml_actions = forms.CharField(widget=YamlAceWidget)
+    coffee = forms.CharField(widget=CoffeeAceWidget)
+    scss = forms.CharField(widget=ScssAceWidget)
 
     class Meta:
         model = Post
