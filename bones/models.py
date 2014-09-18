@@ -60,9 +60,22 @@ class Category(BonesObject):
         verbose_name_plural = "categories"
 
 
+# Blog post statuses
+class Status(models.Model):
+    title = models.CharField(max_length=255, null=True, blank=True)
+    slug = models.SlugField(null=True, blank=True)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = "statuses"
+
+
 # Blog post model
 class Post(BonesObject):
     category = models.ForeignKey('Category', null=True, default=1)
+    post_status = models.ForeignKey('Status', null=True, default=1)
     content = models.TextField(null=True, blank=True)
     content_html = models.TextField(null=True, blank=True)
     yaml_actions = models.TextField(null=True, blank=True)
