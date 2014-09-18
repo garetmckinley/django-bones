@@ -26,7 +26,7 @@ class PostAdmin(BonesObjectAdmin):
     """PostAdmin is a subclass of BonesObjectAdmin"""
     fieldsets = (
         (None, {
-            'fields': ('title', 'slug', 'content',)
+            'fields': ('title', 'slug', 'category', 'post_status', 'content',)
         }),
         ('Advanced options', {
             'classes': ('collapse',),
