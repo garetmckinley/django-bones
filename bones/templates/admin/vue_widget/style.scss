@@ -1,6 +1,6 @@
 #editor {
     margin: 0;
-    height: 400px;
+    height: 100%;
     font-family: 'Helvetica Neue', Arial, sans-serif;
 
     /* Reset Styles */
@@ -69,3 +69,7 @@
     }
 }
 
+
+.field-content {
+    border-bottom: 3px solid orange;
+}
