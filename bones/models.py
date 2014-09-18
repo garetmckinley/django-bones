@@ -72,10 +72,9 @@ class Status(models.Model):
         verbose_name_plural = "statuses"
 
 
-# Blog post model
-class Post(BonesObject):
-    category = models.ForeignKey('Category', null=True, default=1)
-    post_status = models.ForeignKey('Status', null=True, default=1)
+# Bones Content model
+class Content(BonesObject):
+    status = models.ForeignKey('Status', null=True, default=1)
     status_expression = models.TextField(null=True, blank=True)
     content = models.TextField(null=True, blank=True)
     content_html = models.TextField(null=True, blank=True)
@@ -91,3 +90,14 @@ class Post(BonesObject):
         self.css = compiler.compile(self.scss)
         self.content_html = markdown.markdown(self.content)
         super(Post, self).save(force_insert, force_update)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        abstract = True
+
+
+# Blog post model
+class Post(Content):
+    category = models.ForeignKey('Category', null=True, default=1)
