@@ -1,0 +1,70 @@
+#editor {
+    margin: 0;
+    height: 400px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+
+    /* Reset Styles */
+    margin: 0;
+    padding: 2px 5px 3px 5px;
+    text-align: left;
+    font-weight: bold;
+    background: white;
+    color: black;
+
+    -webkit-box-shadow: inset 10px 10px 5px -5px rgba(0,0,0,0.2);
+    -moz-box-shadow: inset 10px 10px 5px -5px rgba(0,0,0,0.2);
+    box-shadow: inset 10px 10px 5px -5px rgba(0,0,0,0.2);
+
+
+    p {
+        margin-left: 0;
+        padding-left: 0;
+        font-size: 14px;
+    }
+
+    ul {
+        margin-left: 2em;
+        padding-left: 0;
+    }
+
+    blockquote {
+        margin-left: 2em;
+        padding-left: 1em;
+    }
+
+    textarea, div {
+        display: inline-block;
+        width: 49%;
+        height: 100%;
+        vertical-align: top;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        background-color: transparent;
+        padding: 0 20px;
+        h1, h2, h3, h4, h5, h6 {
+            background: transparent;
+            color: black;
+        }
+    }
+
+    div {
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+
+    textarea {
+        border: none;
+        border-right: 1px solid #ccc;
+        resize: none;
+        outline: none;
+        font-size: 16px;
+        font-family: 'Monaco', courier, monospace;
+        padding: 20px;
+    }
+
+    code {
+        color: #f66;
+    }
+}
+
