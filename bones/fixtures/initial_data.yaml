@@ -13,4 +13,9 @@
   fields:
     title: "Published"
     slug: "published"
+- model: bones.Status
+  pk: 3
+  fields:
+    title: "Expression"
+    slug: "Expression"
 
