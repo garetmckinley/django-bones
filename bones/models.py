@@ -3,6 +3,9 @@ from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.db import models
 from django.conf import settings
+from scss import Scss
+import coffeescript
+import markdown
 
 
 # Default object model for bones
@@ -60,4 +63,17 @@ class Category(BonesObject):
 # Blog post model
 class Post(BonesObject):
     category = models.ForeignKey('Category', null=True, default=1)
-    content = models.TextField(null=True)
+    content = models.TextField(null=True, blank=True)
+    content_html = models.TextField(null=True, blank=True)
+    yaml_actions = models.TextField(null=True, blank=True)
+    coffee = models.TextField(null=True, blank=True)
+    javascript = models.TextField(null=True, blank=True)
+    scss = models.TextField(null=True, blank=True)
+    css = models.TextField(null=True, blank=True)
+
+    def save(self, force_insert=False, force_update=False, using=False):
+        self.javascript = coffeescript.compile(self.coffee)
+        compiler = Scss()
+        self.css = compiler.compile(self.scss)
+        self.content_html = markdown.markdown(self.content)
+        super(Post, self).save(force_insert, force_update)
