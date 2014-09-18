@@ -1,5 +1,6 @@
 from django.contrib import admin
 from bones.models import BonesObject, Post, BonesProfile, Media, Category
+from bones.forms import PostForm
 
 
 class BonesObjectAdmin(admin.ModelAdmin):
@@ -20,8 +21,23 @@ class MediaAdmin(admin.ModelAdmin):
     preview.short_description = 'Preview'
 
 
+class PostAdmin(BonesObjectAdmin):
+
+    """PostAdmin is a subclass of BonesObjectAdmin"""
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'slug', 'content',)
+        }),
+        ('Advanced options', {
+            'classes': ('collapse',),
+            'fields': ('yaml_actions', 'coffee', 'scss',)
+        }),
+    )
+    form = PostForm
+
+
 # Register your models here.
 admin.site.register(Media, MediaAdmin)
 admin.site.register(Category, BonesObjectAdmin)
-admin.site.register(Post, BonesObjectAdmin)
+admin.site.register(Post, PostAdmin)
 admin.site.register(BonesProfile)
