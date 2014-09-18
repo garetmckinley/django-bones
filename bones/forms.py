@@ -21,8 +21,23 @@ class PostVueWidget(forms.Textarea):
         )
 
 
+class YamlAceWidget(forms.Textarea):
+
+    class Media:
+        css = {
+            'all': (
+                'bones/admin/yaml_widget/style.css',
+            )
+        }
+        js = (
+            'bones/lib/ace/ace.js',
+            'bones/admin/yaml_widget/init.js',
+        )
+
+
 class PostForm(forms.ModelForm):
     content = forms.CharField(widget=PostVueWidget)
+    yaml_actions = forms.CharField(widget=YamlAceWidget)
 
     class Meta:
         model = Post
