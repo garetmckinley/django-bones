@@ -10,11 +10,14 @@ class PostVueWidget(forms.Textarea):
 
     class Media:
         css = {
-            'all': ('bones/admin/vue_widget/style.css',
+            'all': ('bones/lib/jquery-ui/jquery-ui.theme.css',
+                    'bones/lib/jquery-ui/jquery-ui.min.css',
+                    'bones/admin/vue_widget/style.css',
                     'bones/admin/vue_widget/github-markdown.css',)
         }
         js = (
             'bones/lib/jquery-1.11.1.min.js',
+            'bones/lib/jquery-ui/jquery-ui.min.js',
             'bones/lib/marked.min.js',
             'bones/lib/vue.min.js',
             'bones/admin/vue_widget/init.js',
