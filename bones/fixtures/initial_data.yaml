@@ -1,0 +1,5 @@
+- model: bones.Category
+  pk: 1
+  fields:
+    title: Uncategorized
+    slug: uncategorized
