@@ -1,0 +1,3 @@
+div#editor
+    textarea(v-model="input", name="content")#id_content
+    div(v-html="input | marked").markdown-body
