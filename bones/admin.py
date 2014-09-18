@@ -1,5 +1,5 @@
 from django.contrib import admin
-from bones.models import BonesObject, Post, BonesProfile, Media, Category
+from bones.models import BonesObject, Post, BonesProfile, Media, Category, Page
 from bones.forms import PostForm
 
 
@@ -26,11 +26,20 @@ class PostAdmin(BonesObjectAdmin):
     """PostAdmin is a subclass of BonesObjectAdmin"""
     fieldsets = (
         (None, {
-            'fields': ('title', 'slug', 'category', 'status', 'status_expression', 'content',)
+            'fields': ('title',
+                       'slug',
+                       'category',
+                       'status',
+                       'status_expression',
+                       'content',
+                       )
         }),
         ('Advanced options', {
             'classes': ('collapse',),
-            'fields': ('yaml_actions', 'coffee', 'scss',)
+            'fields': ('yaml_actions',
+                       'coffee',
+                       'scss',
+                       )
         }),
     )
     form = PostForm
