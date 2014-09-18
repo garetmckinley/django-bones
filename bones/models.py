@@ -76,6 +76,7 @@ class Status(models.Model):
 class Post(BonesObject):
     category = models.ForeignKey('Category', null=True, default=1)
     post_status = models.ForeignKey('Status', null=True, default=1)
+    status_expression = models.TextField(null=True, blank=True)
     content = models.TextField(null=True, blank=True)
     content_html = models.TextField(null=True, blank=True)
     yaml_actions = models.TextField(null=True, blank=True)

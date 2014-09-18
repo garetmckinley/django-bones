@@ -66,11 +66,27 @@ class ScssAceWidget(forms.Textarea):
         )
 
 
+class ExpressionAceWidget(forms.Textarea):
+
+    class Media:
+        css = {
+            'all': (
+                'bones/admin/expression_widget/style.css',
+            )
+        }
+        js = (
+            'bones/lib/jquery-1.11.1.min.js',
+            'bones/lib/ace/ace.js',
+            'bones/admin/expression_widget/init.js',
+        )
+
+
 class PostForm(forms.ModelForm):
     content = forms.CharField(widget=PostVueWidget)
     yaml_actions = forms.CharField(widget=YamlAceWidget)
     coffee = forms.CharField(widget=CoffeeAceWidget)
     scss = forms.CharField(widget=ScssAceWidget)
+    status_expression = forms.CharField(widget=ExpressionAceWidget)
 
     class Meta:
         model = Post
