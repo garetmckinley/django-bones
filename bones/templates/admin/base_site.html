@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block extrahead %}
+<script src="{% static 'bones/lib/jquery-1.11.1.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'bones/lib/chickenglyph/stylesheets/chickenglyph.css' %}">
+<script>
+        $(document).ready(function(){
+
+
+                $('.add-another').each(function(i,o){
+                        select_obj=$(o).parent().find('select')[0];
+                        item_id=select_obj.options[select_obj.selectedIndex].value;
+                        edit_url=o.href.replace('add',item_id);
+                        $(this).html('<span> </span><a class="edit-popup" '
+                                +'href="'+o.href+'"><span class="icon-add"> Add</span></a>');
+                        $(this).after('<span> </span><a class="edit-popup" '
+                                +'href="'+edit_url+'"><span class="icon-edit"> Edit</span></a>')
+                })
+
+                $('.edit-popup').click(function(event){
+                        win=window.open(this.href,'Edit Window',
+                                'height=500,width=800,resizable=yes,scrollbars=yes')
+                        win.focus()
+                        event.preventDefault()
+                })
+
+        });
+
+</script>
+{% endblock %}
