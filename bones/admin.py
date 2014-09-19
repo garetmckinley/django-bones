@@ -1,5 +1,7 @@
 from django.contrib import admin
-from bones.models import BonesObject, Post, BonesProfile, Media, Category, Page
+from bones.models import (
+    BonesObject, Post, BonesProfile, Media, Category, Page,
+    Template,)
 from bones.forms import PostForm
 
 
@@ -45,8 +47,33 @@ class PostAdmin(BonesObjectAdmin):
     form = PostForm
 
 
+class PageAdmin(BonesObjectAdmin):
+
+    """PostAdmin is a subclass of BonesObjectAdmin"""
+    fieldsets = (
+        (None, {
+            'fields': ('title',
+                       'slug',
+                       'status',
+                       'status_expression',
+                       'content',
+                       )
+        }),
+        ('Advanced options', {
+            'classes': ('collapse',),
+            'fields': ('yaml_actions',
+                       'coffee',
+                       'scss',
+                       )
+        }),
+    )
+    form = PostForm
+
+
 # Register your models here.
 admin.site.register(Media, MediaAdmin)
+admin.site.register(Template, BonesObjectAdmin)
 admin.site.register(Category, BonesObjectAdmin)
 admin.site.register(Post, PostAdmin)
+admin.site.register(Page, PageAdmin)
 admin.site.register(BonesProfile)
