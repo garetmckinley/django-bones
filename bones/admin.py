@@ -38,9 +38,9 @@ class PostAdmin(BonesObjectAdmin):
         }),
         ('Advanced options', {
             'classes': ('collapse',),
-            'fields': ('yaml_actions',
-                       'coffee',
-                       'scss',
+            'fields': ('yaml_input',
+                       'coffee_input',
+                       'scss_input',
                        )
         }),
     )
@@ -61,9 +61,9 @@ class PageAdmin(BonesObjectAdmin):
         }),
         ('Advanced options', {
             'classes': ('collapse',),
-            'fields': ('yaml_actions',
-                       'coffee',
-                       'scss',
+            'fields': ('yaml_input',
+                       'coffee_input',
+                       'scss_input',
                        )
         }),
     )

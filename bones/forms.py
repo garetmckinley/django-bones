@@ -82,11 +82,12 @@ class ExpressionAceWidget(forms.Textarea):
 
 
 class PostForm(forms.ModelForm):
-    content = forms.CharField(widget=PostVueWidget)
-    yaml_actions = forms.CharField(widget=YamlAceWidget)
-    coffee = forms.CharField(widget=CoffeeAceWidget)
-    scss = forms.CharField(widget=ScssAceWidget)
-    status_expression = forms.CharField(widget=ExpressionAceWidget)
+    content = forms.CharField(widget=PostVueWidget, required=False)
+    yaml_input = forms.CharField(widget=YamlAceWidget, required=False)
+    coffee_input = forms.CharField(widget=CoffeeAceWidget, required=False)
+    scss_input = forms.CharField(widget=ScssAceWidget, required=False)
+    status_expression = forms.CharField(
+        widget=ExpressionAceWidget, required=False)
 
     class Meta:
         model = Post
