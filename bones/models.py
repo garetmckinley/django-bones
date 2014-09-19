@@ -15,7 +15,7 @@ class BonesObject(models.Model):
     created = models.DateTimeField(auto_now_add=True, null=True)
     last_edited = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -65,7 +65,7 @@ class Status(models.Model):
     title = models.CharField(max_length=255, null=True, blank=True)
     slug = models.SlugField(null=True, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -78,20 +78,21 @@ class Content(BonesObject):
     status_expression = models.TextField(null=True, blank=True)
     content = models.TextField(null=True, blank=True)
     content_html = models.TextField(null=True, blank=True)
-    yaml_actions = models.TextField(null=True, blank=True)
-    coffee = models.TextField(null=True, blank=True)
-    javascript = models.TextField(null=True, blank=True)
-    scss = models.TextField(null=True, blank=True)
-    css = models.TextField(null=True, blank=True)
+    yaml_input = models.TextField(null=True, blank=True)
+    coffee_input = models.TextField(null=True, blank=True)
+    javascript_output = models.TextField(null=True, blank=True)
+    scss_input = models.TextField(null=True, blank=True)
+    css_output = models.TextField(null=True, blank=True)
 
     def save(self, force_insert=False, force_update=False, using=False):
-        self.javascript = coffeescript.compile(self.coffee)
+        print("asdf")
+        self.javascript_output = coffeescript.compile(self.coffee_input)
         compiler = Scss()
-        self.css = compiler.compile(self.scss)
+        self.css_output = compiler.compile(self.scss_input)
         self.content_html = markdown.markdown(self.content)
-        super(Post, self).save(force_insert, force_update)
+        super(Content, self).save(force_insert, force_update)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -101,3 +102,24 @@ class Content(BonesObject):
 # Blog post model
 class Post(Content):
     category = models.ForeignKey('Category', null=True, default=1)
+
+
+# Blog page model
+class Page(Content):
+    pass
+
+
+# Post template class
+class Template(BonesObject):
+    jade_input = models.TextField(null=True, blank=True)
+    yaml_input = models.TextField(null=True, blank=True)
+    coffee_input = models.TextField(null=True, blank=True)
+    scss_input = models.TextField(null=True, blank=True)
+    html_output = models.TextField(null=True, blank=True)
+
+    def save(self, force_insert=False, force_update=False, using=False):
+        js = coffeescript.compile(self.coffee_input)
+        compiler = Scss()
+        css = compiler.compile(self.scss_input)
+        #self.html_output = markdown.markdown(self.content)
+        super(Template, self).save(force_insert, force_update)
