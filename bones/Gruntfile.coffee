@@ -23,6 +23,9 @@ module.exports = (grunt) ->
           'templates/admin/'+template+'/*.coffee'
           'templates/admin/'+template+'/*.scss']
         tasks: ['jade:modified', 'coffee:modified', 'compass:widget']
+      admin:
+        files: ['static/admin/css/*.scss']
+        tasks: 'compass:admin'
 
     compass:
       dist:
@@ -33,6 +36,10 @@ module.exports = (grunt) ->
         options:
           sassDir: 'templates/admin/'+template
           cssDir: static_path+'/bones/admin/'+template
+      admin:
+        options:
+          sassDir: 'static/admin/css/'
+          cssDir: static_path+'/admin/css/'
 
     coffee:
       options:
