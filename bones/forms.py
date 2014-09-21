@@ -24,70 +24,40 @@ class PostVueWidget(forms.Textarea):
         )
 
 
-class YamlAceWidget(forms.Textarea):
+class AceWidget(forms.Textarea):
+
+    def __init__(self, label, lang, field):
+        super(AceWidget, self).__init__()
+        self.Media.langs.append(lang)
+        self.Media.labels.append(label)
+        self.Media.fields.append(field)
+        print(self.Media.fields, self.Media.langs, self.Media.fields)
+        langs = "+".join(self. xMedia.langs)
+        fields = "+".join(self.Media.fields)
+        labels = "+".join(self.Media.labels)
+        self.Media.js += ('bones/admin/ace_widget/init.js?lang=%s&field=%s&label=%s' % (
+            langs, fields, labels),)
+        print(self.Media.js)
 
     class Media:
-        css = {
-            'all': (
-                'bones/admin/yaml_widget/style.css',
-            )
-        }
+        langs = []
+        fields = []
+        labels = []
         js = (
             'bones/lib/ace/ace.js',
-            'bones/admin/yaml_widget/init.js',
-        )
-
-
-class CoffeeAceWidget(forms.Textarea):
-
-    class Media:
-        css = {
-            'all': (
-                'bones/admin/coffee_widget/style.css',
-            )
-        }
-        js = (
-            'bones/lib/ace/ace.js',
-            'bones/admin/coffee_widget/init.js',
-        )
-
-
-class ScssAceWidget(forms.Textarea):
-
-    class Media:
-        css = {
-            'all': (
-                'bones/admin/scss_widget/style.css',
-            )
-        }
-        js = (
-            'bones/lib/ace/ace.js',
-            'bones/admin/scss_widget/init.js',
-        )
-
-
-class ExpressionAceWidget(forms.Textarea):
-
-    class Media:
-        css = {
-            'all': (
-                'bones/admin/expression_widget/style.css',
-            )
-        }
-        js = (
-            'bones/lib/jquery-1.11.1.min.js',
-            'bones/lib/ace/ace.js',
-            'bones/admin/expression_widget/init.js',
         )
 
 
 class PostForm(forms.ModelForm):
     content = forms.CharField(widget=PostVueWidget, required=False)
-    yaml_input = forms.CharField(widget=YamlAceWidget, required=False)
-    coffee_input = forms.CharField(widget=CoffeeAceWidget, required=False)
-    scss_input = forms.CharField(widget=ScssAceWidget, required=False)
+    yaml_input = forms.CharField(
+        widget=AceWidget("YAML", "yaml", "yaml_input"), required=False)
+    coffee_input = forms.CharField(
+        widget=AceWidget("Coffee", "coffee", "coffee_input"), required=False)
+    scss_input = forms.CharField(
+        widget=AceWidget("SCSS", "scss", "scss_input"), required=False)
     status_expression = forms.CharField(
-        widget=ExpressionAceWidget, required=False)
+        widget=AceWidget("Status Expression", "python", "status_expression"), required=False)
 
     class Meta:
         model = Post
