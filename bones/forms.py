@@ -32,7 +32,7 @@ class AceWidget(forms.Textarea):
         self.Media.labels.append(label)
         self.Media.fields.append(field)
         print(self.Media.fields, self.Media.langs, self.Media.fields)
-        langs = "+".join(self. xMedia.langs)
+        langs = "+".join(self. Media.langs)
         fields = "+".join(self.Media.fields)
         labels = "+".join(self.Media.labels)
         self.Media.js += ('bones/admin/ace_widget/init.js?lang=%s&field=%s&label=%s' % (
