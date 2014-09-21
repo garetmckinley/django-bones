@@ -57,6 +57,7 @@ $ ->
     $("#id_content").allowTabChar()
     row.each ->
       $(this).resizable handles: $(this).attr("id")
+      $(this).height(460)
       return
 
 
