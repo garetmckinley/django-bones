@@ -21,7 +21,8 @@ def getTemplateStatic():
 def getModernizrDict(request):
     try:
         get = request.COOKIES.get('modernizr')
-        url = urllib.unquote(get).decode('utf8')
+        url = urllib.parse.unquote(get)
+
     except:
         return {}
 
@@ -30,7 +31,7 @@ def getModernizrDict(request):
     keys = [x for ind, x in enumerate(values) if ind % 2 == 0]
     values = [x for ind, x in enumerate(values) if ind % 2 != 0]
     s = []
-    for x in xrange(0, len(keys)):
+    for x in range(0, len(keys)):
         subvalues = re.findall(r"\[([A-Za-z0-9_]+)\]", keys[x])
         if len(subvalues) > 0:
             subvalue = subvalues[0]
