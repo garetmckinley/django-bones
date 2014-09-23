@@ -5,3 +5,4 @@ bones/static/bones/templates/mediachicken
 .sass-cache
 node_modules
 migrations
+django_bones.egg-info
