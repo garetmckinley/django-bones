@@ -1,0 +1,15 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "/Users/garet/Projects/django-bones",
+            "folder_exclude_patterns": [".sass-cache", "__pycache__",
+            "django_bones.egg-info", "node_modules"],
+		}
+	],
+    "settings":
+    {
+        "tab_size": 4,
+    },
+}
