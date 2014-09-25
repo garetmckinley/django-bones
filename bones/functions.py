@@ -4,21 +4,21 @@ import re
 import urllib
 
 
-def loadTemplate(file):
+def load_template(file):
     template = loader.get_template('%s/%s.jade' % (settings.BONES_TEMPLATE,
                                                    file))
     return template
 
 
-def whichTemplate():
+def which_template():
     return settings.BONES_TEMPLATE
 
 
-def getTemplateStatic():
-    return '%sbones/templates/%s' % (settings.STATIC_URL, whichTemplate())
+def get_template_static():
+    return '%sbones/templates/%s' % (settings.STATIC_URL, which_template())
 
 
-def getModernizrDict(request):
+def get_modernizr_dict(request):
     try:
         get = request.COOKIES.get('modernizr')
         url = urllib.parse.unquote(get)
@@ -44,3 +44,9 @@ def getModernizrDict(request):
             key = keys[x]
             modernizr[key] = int(values[x])
     return modernizr
+
+
+def set_default_settings(defaults):
+    for attr, value in defaults.items():
+        if not hasattr(settings, attr):
+            setattr(settings, attr, value)

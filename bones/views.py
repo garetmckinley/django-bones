@@ -7,10 +7,10 @@ from bones import functions
 
 
 def index(request):
-    modernizr = functions.getModernizrDict(request)
-    template = functions.loadTemplate("index")
+    modernizr = functions.get_modernizr_dict(request)
+    template = functions.load_template("index")
     context = RequestContext(request, {
-        'TEMPLATE_STATIC': functions.getTemplateStatic(),
+        'TEMPLATE_STATIC': functions.get_template_static(),
         'modernizr': modernizr
     })
     return HttpResponse(template.render(context))
