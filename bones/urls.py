@@ -8,7 +8,7 @@ urlpatterns = patterns(
 )
 
 templates = Page.objects.filter()
-print(templates)
+
 for template in templates:
     additional_settings = patterns(
         '',
