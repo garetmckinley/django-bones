@@ -6,3 +6,5 @@ bones/static/bones/templates/mediachicken
 node_modules
 migrations
 django_bones.egg-info
+
+*.sublime-workspace
