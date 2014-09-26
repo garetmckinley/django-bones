@@ -1,16 +1,27 @@
 from django.template import RequestContext
 from django.http import HttpResponse
 from django.shortcuts import render
-from bones import functions
+from django.utils.safestring import mark_safe
 
-# Create your views here.
+from bones import functions
+from bones.models import Post
 
 
 def index(request):
-    modernizr = functions.get_modernizr_dict(request)
-    template = functions.load_template("index")
-    context = RequestContext(request, {
-        'TEMPLATE_STATIC': functions.get_template_static(),
-        'modernizr': modernizr
-    })
-    return HttpResponse(template.render(context))
+    return HttpResponse(
+        functions.render_template(request, "index"))
+
+
+def singlepost(request, post_slug):
+    post = Post.objects.get(slug__exact=post_slug)
+    properties = {
+        'TITLE': post.title,
+        'BODY': mark_safe(post.content_html),
+        'CATEGORY': post.category,
+        'POST_DATE': post.post_date,
+        'CREATED_DATE': post.created,
+        'LAST_EDIT_DATE': post.last_edited,
+    }
+
+    return HttpResponse(
+        functions.render_template(request, "singlepost", properties))
