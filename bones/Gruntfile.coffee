@@ -12,6 +12,9 @@ module.exports = (grunt) ->
     watch:
       options:
         livereload: true
+      template:
+        files: ['templates/'+template+'/scss/*.scss', 'templates/'+template+'/coffee/*.coffee']
+        tasks: ['compass:template', 'coffee:template']
       css:
         files: ['templates/'+template+'/scss/*.scss']
         tasks: ['compass']
@@ -28,7 +31,7 @@ module.exports = (grunt) ->
         tasks: 'compass:admin'
 
     compass:
-      dist:
+      template:
         options:
           sassDir: 'templates/'+template+'/scss/'
           cssDir: static_path+'/bones/templates/'+template+'/css/'
@@ -59,6 +62,12 @@ module.exports = (grunt) ->
         dest: static_path+'/bones/admin/'+template
         ext: '.js'
         filter: isModified
+      template:
+        expand: true
+        cwd: 'templates/'+template+'/coffee/'
+        src: '**/*.coffee'
+        dest: static_path+'/bones/templates/'+template+'/js/'
+        ext: '.js'
 
 
     jade:
