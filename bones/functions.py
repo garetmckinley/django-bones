@@ -55,3 +55,7 @@ def set_default_settings(defaults):
     for attr, value in defaults.items():
         if not hasattr(settings, attr):
             setattr(settings, attr, value)
+
+
+def permalink(category, slug):
+    return '/%s/%s/' % (category, slug)
