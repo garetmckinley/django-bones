@@ -18,6 +18,11 @@ def get_template_static():
     return '%sbones/templates/%s' % (settings.STATIC_URL, which_template())
 
 
+def get_template_file_path(file):
+    path = '%s/%s.jade' % (which_template(), file)
+    return path
+
+
 def get_modernizr_dict(request):
     try:
         get = request.COOKIES.get('modernizr')
