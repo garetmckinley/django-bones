@@ -1,4 +1,5 @@
 from django.template import RequestContext, loader
+from django.utils.safestring import mark_safe
 from django.conf import settings
 import re
 import urllib
@@ -59,3 +60,7 @@ def set_default_settings(defaults):
 
 def permalink(category, slug):
     return '/%s/%s/' % (category, slug)
+
+
+def make_link(url, text):
+    return mark_safe('<a href="%s">%s</a>' % (url, text))
