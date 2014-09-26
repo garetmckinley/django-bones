@@ -20,10 +20,8 @@ rendered_ace = false
 
 cssSuccess = (template, field, label, lang) ->
   (data, textStatus, jqXHR) ->
-    console.log "Working on", lang
     row = $(".field-"+field)
     content = $("#id_"+field).val()
-    console.log ".field-"+field
     row.html("loading widget...")
 
     css = data.replace(new RegExp("__FIELD__", 'g'), field)
@@ -43,7 +41,6 @@ cssSuccess = (template, field, label, lang) ->
     raw.val content
     editor.getSession().on "change", ->
       raw.val editor.getSession().getValue()
-    console.log "Done with", lang
 
 
 templateSuccess = (field, label, lang) ->
@@ -59,11 +56,9 @@ templateSuccess = (field, label, lang) ->
 
 $ ->
   if rendered_ace is false
-    console.log langs, fields, labels
     rendered_ace = true
     i = 0
     while i < langs.length
-      console.log "Starting", langs[i]
       $.ajax
         async: false
         type: "GET"
