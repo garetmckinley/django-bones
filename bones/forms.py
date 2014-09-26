@@ -59,3 +59,19 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
+
+
+class WidgetForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(WidgetForm, self).__init__(*args, **kwargs)
+        print("TYPE %s" % type(self.instance.yaml_input))
+        if self.instance:
+            self.instance.yaml_input = forms.CharField(
+                widget=AceWidget("YAML", "yaml", "yaml_input"), required=False)
+
+    yaml_input = forms.CharField(
+        widget=AceWidget("YAML", "yaml", "yaml_input"), required=False)
+
+    class Meta:
+        exclude = ['author', 'last_editor']

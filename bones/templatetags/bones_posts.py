@@ -26,13 +26,16 @@ def post_loop(max_posts):
         permalink = functions.permalink(post.category.slug, post.slug)
         summary = Truncator(post.content_html)
         properties = {
-            "TITLE": post.title,
-            "TITLE_LINK": functions.make_link(permalink, post.title),
-            "BODY": mark_safe(summary.words(100, html=True)),
-            "CATEGORY": post.category,
-            "POST_DATE": post.post_date,
-            "CREATED_DATE": post.created,
-            "LAST_EDIT_DATE": post.last_edited,
+            'TITLE': post.title,
+            'TITLE_LINK': functions.make_link(permalink, post.title),
+            'PERMALINK': permalink,
+            'BODY': mark_safe(summary.words(100, html=True)),
+            'CATEGORY': post.category,
+            'POST_DATE': post.post_date,
+            'CREATED_DATE': post.created,
+            'LAST_EDIT_DATE': post.last_edited,
+            'AUTHOR': post.author,
+            'LAST_EDITOR': post.last_editor,
         }
         output += render_to_string(
             functions.get_template_file_path("postloop"), properties)
