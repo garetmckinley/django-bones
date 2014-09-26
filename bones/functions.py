@@ -24,6 +24,29 @@ def get_template_file_path(file):
     return path
 
 
+def render_template(request, template, properties={}):
+    modernizr = get_modernizr_dict(request)
+
+    wrapper = load_template("wrapper")
+    template = load_template(template)
+
+    properties['TEMPLATE_STATIC'] = get_template_static()
+    properties['modernizr'] = modernizr
+
+    context = RequestContext(
+        request, properties)
+    subtemplate = template.render(context)
+
+    wrapper_context = RequestContext(
+        request,
+        {
+            'PAGE_CONTENT': subtemplate,
+            'TEMPLATE_STATIC': get_template_static(),
+            'modernizr': modernizr,
+        })
+    return wrapper.render(wrapper_context)
+
+
 def get_modernizr_dict(request):
     try:
         get = request.COOKIES.get('modernizr')
