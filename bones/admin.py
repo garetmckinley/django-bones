@@ -1,14 +1,22 @@
 from django.contrib import admin
 from bones.models import (
     BonesObject, Post, BonesProfile, Media, Category, Page,
-    Template,)
-from bones.forms import PostForm
+    Template, Menu)
+from bones.forms import PostForm, WidgetForm
 
 
 class BonesObjectAdmin(admin.ModelAdmin):
 
     """Default ModelAdmin for BonesObject"""
     prepopulated_fields = {"slug": ("title",)}
+    form = WidgetForm
+
+    def save_model(self, request, obj, form, change):
+        print("SAVING MODEL")
+        if getattr(obj, 'author', None) is None:
+            obj.author = request.user
+        obj.last_editor = request.user
+        obj.save()
 
 
 class MediaAdmin(admin.ModelAdmin):
@@ -74,6 +82,7 @@ class PageAdmin(BonesObjectAdmin):
 # Register your models here.
 admin.site.register(Media, MediaAdmin)
 admin.site.register(Template, BonesObjectAdmin)
+admin.site.register(Menu, BonesObjectAdmin)
 admin.site.register(Category, BonesObjectAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Page, PageAdmin)

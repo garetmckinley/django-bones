@@ -14,6 +14,9 @@ class BonesObject(models.Model):
     slug = models.SlugField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
     last_edited = models.DateTimeField(auto_now=True, null=True)
+    author = models.ForeignKey(User, null=True, blank=True)
+    last_editor = models.ForeignKey(
+        User, null=True, blank=True, related_name='%(class)s_last_editor')
 
     def __str__(self):
         return self.title
@@ -123,3 +126,7 @@ class Template(BonesObject):
         css = compiler.compile(self.scss_input)
         #self.html_output = markdown.markdown(self.content)
         super(Template, self).save(force_insert, force_update)
+
+
+class Menu(BonesObject):
+    yaml_input = models.TextField(null=True, blank=True)
