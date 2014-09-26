@@ -32,6 +32,7 @@ class PostAdmin(BonesObjectAdmin):
                        'slug',
                        'category',
                        'status',
+                       'post_date',
                        'status_expression',
                        'content',
                        )

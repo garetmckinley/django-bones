@@ -100,6 +100,7 @@ class Content(BonesObject):
 
 # Blog post model
 class Post(Content):
+    post_date = models.DateTimeField(null=True)
     category = models.ForeignKey('Category', null=True, default=1)
 
 
