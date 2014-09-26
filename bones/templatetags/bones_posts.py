@@ -23,7 +23,7 @@ def post_loop(max_posts):
 
     for x in range(0, len(posts)):
         post = posts[x]
-        permalink = functions.permalink(post.category, post.slug)
+        permalink = functions.permalink(post.category.slug, post.slug)
         summary = Truncator(post.content_html)
         properties = {
             "TITLE": post.title,
