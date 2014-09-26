@@ -85,7 +85,6 @@ class Content(BonesObject):
     css_output = models.TextField(null=True, blank=True)
 
     def save(self, force_insert=False, force_update=False, using=False):
-        print("asdf")
         self.javascript_output = coffeescript.compile(self.coffee_input)
         compiler = Scss()
         self.css_output = compiler.compile(self.scss_input)
