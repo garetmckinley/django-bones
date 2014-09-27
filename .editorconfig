@@ -14,3 +14,6 @@ trim_trailing_whitespace = false
 
 [*.jade]
 indent_size = 2
+
+[*.coffee]
+indent_size = 2
