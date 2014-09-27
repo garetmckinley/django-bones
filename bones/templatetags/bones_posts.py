@@ -6,10 +6,6 @@ from django.utils.text import Truncator
 from bones.models import Post, BonesProfile
 from bones import functions
 
-import datetime
-import re
-from markdown import markdown
-
 
 register = template.Library()
 
